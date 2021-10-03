@@ -9,7 +9,17 @@ namespace M3D_ISICG
 {
 	const std::string LabWork3::_shaderFolder = "src/lab_works/lab_work_3/shaders/";
 
-	LabWork3::~LabWork3() { glDeleteProgram( _program ); }
+	LabWork3::~LabWork3() {
+
+		glDeleteBuffers( 1, &_cube._vboPositions );
+		glDeleteBuffers( 1, &_cube._vboColors );
+		glDeleteBuffers( 1, &_cube._vao );
+		glDeleteBuffers( 1, &_cube._ebo );
+
+		glDisableVertexArrayAttrib( _cube._vao, 0 );
+		glDeleteVertexArrays( 1, &_cube._vao );
+		glDeleteProgram( _program );
+	}
 
 	bool LabWork3::init()
 	{
@@ -25,7 +35,11 @@ namespace M3D_ISICG
 		_initBuffers();
 
 		glUseProgram( _program );
+
+		_cube._transformation = glm::scale( _cube._transformation, glm::vec3( 0.8f ) );
+		glProgramUniformMatrix4fv( _program, _uModelMatrixLoc, 1, GL_FALSE, glm::value_ptr( _cube._transformation ) );
 		
+
 		_updateViewMatrix();
 		_updateProjectionMatrix();
 
@@ -35,12 +49,18 @@ namespace M3D_ISICG
 
 	void LabWork3::animate( const float p_deltaTime )
 	{
+		_cube._transformation = glm::rotate( _cube._transformation, glm::radians( p_deltaTime ), glm::vec3( 0, 1, 1 ) );
+		glProgramUniformMatrix4fv( _program, _uModelMatrixLoc, 1, GL_FALSE, glm::value_ptr( _cube._transformation ) );
 	}
 
 	void LabWork3::render()
 	{
+		glEnable( GL_DEPTH_TEST );
 		// Clear the color buffer.
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		glBindVertexArray( _cube._vao );
+		glDrawElements( GL_TRIANGLES, _cube._indices.size(), GL_UNSIGNED_INT, 0 );
+		glBindVertexArray( 0 );
 	}
 
 	void LabWork3::handleEvents( const SDL_Event & p_event )
@@ -212,18 +232,68 @@ namespace M3D_ISICG
 
 	void LabWork3::_initBuffers()
 	{
+		glCreateBuffers( 1, &_cube._vboPositions );
+		glNamedBufferData(
+			_cube._vboPositions, _cube._vertices.size() * sizeof( Vec3f ), _cube._vertices.data(), GL_STATIC_DRAW );
+
+		glCreateBuffers( 1, &_cube._ebo );
+		glNamedBufferData( _cube._ebo, _cube._indices.size() * sizeof( int ), _cube._indices.data(), GL_STATIC_DRAW );
+
+		glCreateBuffers( 1, &_cube._vboColors );
+		glNamedBufferData( _cube._vboColors,
+						   _cube._vertexColors.size() * sizeof( Vec3f ),
+						   _cube._vertexColors.data(),
+						   GL_STATIC_DRAW );
+
+		glCreateVertexArrays( 1, &_cube._vao );
+		glEnableVertexArrayAttrib( _cube._vao, 0 );
+		glEnableVertexArrayAttrib( _cube._vao, 1 );
+		glVertexArrayAttribFormat( _cube._vao, 0, 3, GL_FLOAT, GL_FALSE, 0 );
+
+		glVertexArrayVertexBuffer( _cube._vao, 0, _cube._vboPositions, 0, sizeof( float ) * 3 );
+		glVertexArrayElementBuffer( _cube._vao, _cube._ebo );
+		glVertexArrayVertexBuffer( _cube._vao, 1, _cube._vboColors, 0, sizeof( float ) * 3 );
 	}
 
 	void LabWork3::_updateViewMatrix()
 	{
+		glProgramUniformMatrix4fv( _program, _uViewMatrixLoc, 1, GL_FALSE, glm::value_ptr(_camera.getViewMatrix()) );
 	}
 
 	void LabWork3::_updateProjectionMatrix()
 	{
+		glProgramUniformMatrix4fv( _program, _uProjectionMatrixLoc, 1, GL_FALSE, glm::value_ptr( _camera.getProjectionMatrix() ) );
 	}
 
 	LabWork3::Mesh LabWork3::_createCube()
 	{		
-		return Mesh();
+		Mesh cube;
+		cube._vertices = { { -0.5, -0.5, -0.5 }, { 0.5, -0.5, -0.5 }, { 0.5, 0.5, -0.5 }, { -0.5, 0.5, -0.5 },
+						   { -0.5, -0.5, 0.5 },	 { 0.5, -0.5, 0.5 },  { 0.5, 0.5, 0.5 },  { -0.5, 0.5, 0.5 } };
+
+		cube._vertexColors = { getRandomVec3f(), getRandomVec3f(), getRandomVec3f(), getRandomVec3f(),
+							   getRandomVec3f(), getRandomVec3f(), getRandomVec3f(), getRandomVec3f() };
+
+		cube._indices = { // back
+						  0, 1, 2,
+						  2, 3, 0,
+						  // right
+						  1, 5, 6,
+						  6, 2, 1,
+						  // front
+						  7, 6, 5,
+						  5, 4, 7,
+						  // left
+						  4, 0, 3,
+						  3, 7, 4, 
+						  // bottom
+						  4, 5, 1,
+						  1, 0, 4,
+						  // top
+						  3, 2, 6,
+						  6, 7, 3
+		};
+
+		return cube;
 	}
 } // namespace M3D_ISICG
