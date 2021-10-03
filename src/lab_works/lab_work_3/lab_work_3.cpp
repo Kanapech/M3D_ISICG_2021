@@ -40,8 +40,9 @@ namespace M3D_ISICG
 		glProgramUniformMatrix4fv( _program, _uModelMatrixLoc, 1, GL_FALSE, glm::value_ptr( _cube._transformation ) );
 		
 
-		_updateViewMatrix();
-		_updateProjectionMatrix();
+		//_updateViewMatrix();
+		//_updateProjectionMatrix();
+		_updateMVPMatrix();
 
 		std::cout << "Done!" << std::endl;
 		return true;
@@ -51,6 +52,7 @@ namespace M3D_ISICG
 	{
 		_cube._transformation = glm::rotate( _cube._transformation, glm::radians( p_deltaTime ), glm::vec3( 0, 1, 1 ) );
 		glProgramUniformMatrix4fv( _program, _uModelMatrixLoc, 1, GL_FALSE, glm::value_ptr( _cube._transformation ) );
+		_updateMVPMatrix();
 	}
 
 	void LabWork3::render()
@@ -71,27 +73,39 @@ namespace M3D_ISICG
 			{
 			case SDL_SCANCODE_W: // Front
 				_camera.moveFront( _cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			case SDL_SCANCODE_S: // Back
 				_camera.moveFront( -_cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			case SDL_SCANCODE_A: // Left
 				_camera.moveRight( -_cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			case SDL_SCANCODE_D: // Right
 				_camera.moveRight( _cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			case SDL_SCANCODE_R: // Up
 				_camera.moveUp( _cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			case SDL_SCANCODE_F: // Bottom
 				_camera.moveUp( -_cameraSpeed );
-				_updateViewMatrix();
+				//_updateViewMatrix();
+
+				_updateMVPMatrix();
 				break;
 			default: break;
 			}
@@ -102,7 +116,9 @@ namespace M3D_ISICG
 			 && !ImGui::GetIO().WantCaptureMouse )
 		{
 			_camera.rotate( p_event.motion.xrel * _cameraSensitivity, p_event.motion.yrel * _cameraSensitivity );
-			_updateViewMatrix();
+			//_updateViewMatrix();
+
+			_updateMVPMatrix();
 		}
 	}
 
@@ -120,12 +136,16 @@ namespace M3D_ISICG
 		if ( ImGui::SliderFloat( "fovy", &_fovy, 10.f, 160.f, "%01.f" ) )
 		{
 			_camera.setFovy( _fovy );
-			_updateProjectionMatrix();
+			//_updateProjectionMatrix();
+
+			_updateMVPMatrix();
 		}
 		if ( ImGui::SliderFloat( "Speed", &_cameraSpeed, 0.1f, 10.f, "%01.1f" ) )
 		{
 			_camera.setFovy( _fovy );
-			_updateProjectionMatrix();
+			//_updateProjectionMatrix();
+
+			_updateMVPMatrix();
 		}
 
 		ImGui::End();
@@ -220,6 +240,7 @@ namespace M3D_ISICG
 		_uModelMatrixLoc	  = glGetUniformLocation( _program, "uModelMatrix" );
 		_uViewMatrixLoc		  = glGetUniformLocation( _program, "uViewMatrix" );
 		_uProjectionMatrixLoc = glGetUniformLocation( _program, "uProjectionMatrix" );
+		_uMVPMatrixLoc		  = glGetUniformLocation( _program, "uMVPMatrix" );
 		// ====================================================================
 
 		return true;
@@ -228,6 +249,8 @@ namespace M3D_ISICG
 	void LabWork3::_initCamera()
 	{
 		_camera.setScreenSize( _windowWidth, _windowHeight );
+		_camera.setPosition(Vec3f( 0, 1, 3 ));
+		_camera.setLookAt( Vec3f( 0, 0, 1 ) );
 	}
 
 	void LabWork3::_initBuffers()
@@ -240,10 +263,7 @@ namespace M3D_ISICG
 		glNamedBufferData( _cube._ebo, _cube._indices.size() * sizeof( int ), _cube._indices.data(), GL_STATIC_DRAW );
 
 		glCreateBuffers( 1, &_cube._vboColors );
-		glNamedBufferData( _cube._vboColors,
-						   _cube._vertexColors.size() * sizeof( Vec3f ),
-						   _cube._vertexColors.data(),
-						   GL_STATIC_DRAW );
+		glNamedBufferData( _cube._vboColors, _cube._vertexColors.size() * sizeof( Vec3f ), _cube._vertexColors.data(), GL_STATIC_DRAW );
 
 		glCreateVertexArrays( 1, &_cube._vao );
 		glEnableVertexArrayAttrib( _cube._vao, 0 );
@@ -263,6 +283,12 @@ namespace M3D_ISICG
 	void LabWork3::_updateProjectionMatrix()
 	{
 		glProgramUniformMatrix4fv( _program, _uProjectionMatrixLoc, 1, GL_FALSE, glm::value_ptr( _camera.getProjectionMatrix() ) );
+	}
+
+	void LabWork3::_updateMVPMatrix()
+	{ 
+		Mat4f uMVPMat = _camera.getProjectionMatrix() * _camera.getViewMatrix() * _cube._transformation; 
+		glProgramUniformMatrix4fv( _program, _uMVPMatrixLoc,  1, GL_FALSE, glm::value_ptr( uMVPMat ));
 	}
 
 	LabWork3::Mesh LabWork3::_createCube()

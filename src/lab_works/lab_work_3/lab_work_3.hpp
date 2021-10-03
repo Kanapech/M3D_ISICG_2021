@@ -65,6 +65,7 @@ namespace M3D_ISICG
 		void _initBuffers();
 		void _updateViewMatrix();
 		void _updateProjectionMatrix();
+		void _updateMVPMatrix();
 
 		// Create a mesh representing a unit cube centerd in (0,0,0)
 		Mesh _createCube();
@@ -89,6 +90,7 @@ namespace M3D_ISICG
 		GLint _uModelMatrixLoc		= GL_INVALID_INDEX;
 		GLint _uViewMatrixLoc		= GL_INVALID_INDEX;
 		GLint _uProjectionMatrixLoc = GL_INVALID_INDEX;
+		GLint _uMVPMatrixLoc = GL_INVALID_INDEX;
 		// ================
 
 		static const std::string _shaderFolder;
