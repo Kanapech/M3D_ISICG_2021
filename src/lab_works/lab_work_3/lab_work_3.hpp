@@ -73,6 +73,7 @@ namespace M3D_ISICG
 	  private:
 		// ================ Scene data.
 		Mesh   _cube;
+		Mesh   _cube2;
 		Camera _camera;
 		// ================
 
@@ -90,7 +91,7 @@ namespace M3D_ISICG
 		GLint _uModelMatrixLoc		= GL_INVALID_INDEX;
 		GLint _uViewMatrixLoc		= GL_INVALID_INDEX;
 		GLint _uProjectionMatrixLoc = GL_INVALID_INDEX;
-		GLint _uMVPMatrixLoc = GL_INVALID_INDEX;
+		GLint _uMVPMatrixLoc		= GL_INVALID_INDEX;
 		// ================
 
 		static const std::string _shaderFolder;

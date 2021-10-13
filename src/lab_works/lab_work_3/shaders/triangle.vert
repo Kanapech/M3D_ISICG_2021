@@ -5,9 +5,9 @@ layout( location = 1 ) in vec3 aVertexColor;
 
 out vec3 color;
 
-/*uniform mat4 uModelMatrix;
+uniform mat4 uModelMatrix;
 uniform mat4 uViewMatrix;
-uniform mat4 uProjectionMatrix;*/
+uniform mat4 uProjectionMatrix;
 uniform mat4 uMVPMatrix;
 
 void main()

@@ -63,7 +63,7 @@ namespace M3D_ISICG
 
 	void Camera::_computeProjectionMatrix()
 	{
-		_projectionMatrix = glm::perspective( _fovy, _aspectRatio, _zNear, _zFar );
+		_projectionMatrix = glm::perspective( glm::radians(_fovy), _aspectRatio, _zNear, _zFar );
 	}
 
 	void Camera::_updateVectors()
