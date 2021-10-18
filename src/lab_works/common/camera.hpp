@@ -26,6 +26,8 @@ namespace M3D_ISICG
 		void moveUp( const float p_delta );
 		void rotate( const float p_yaw, const float p_pitch );
 
+		void print() const;
+
 	  private:
 		void _computeViewMatrix();
 		void _computeProjectionMatrix();

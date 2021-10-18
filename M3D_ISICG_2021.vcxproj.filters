@@ -85,6 +85,15 @@
     <ClCompile Include="src\lab_works\lab_work_2\lab_work_2.cpp">
       <Filter>Source Files\lab_works\lab_work_2</Filter>
     </ClCompile>
+    <ClCompile Include="src\lab_works\lab_work_4\lab_work_4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\common\models\triangle_mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\common\models\triangle_mesh_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\application.hpp">
@@ -138,6 +147,10 @@
     <ClInclude Include="src\lab_works\lab_work_3\lab_work_3.hpp">
       <Filter>Source Files\lab_works\lab_work_3</Filter>
     </ClInclude>
+    <ClInclude Include="src\lab_works\lab_work_4\lab_work_4.hpp" />
+    <ClInclude Include="src\lab_works\common\models\base_model.hpp" />
+    <ClInclude Include="src\lab_works\common\models\triangle_mesh.hpp" />
+    <ClInclude Include="src\lab_works\common\models\triangle_mesh_model.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\lab_works\lab_work_1\shaders\lw1.frag">
@@ -158,5 +171,7 @@
     <None Include="src\lab_works\lab_work_3\shaders\triangle.frag">
       <Filter>Source Files\lab_works\lab_work_3\shaders</Filter>
     </None>
+    <None Include="src\lab_works\lab_work_4\shaders\mesh.frag" />
+    <None Include="src\lab_works\lab_work_4\shaders\mesh.vert" />
   </ItemGroup>
 </Project>

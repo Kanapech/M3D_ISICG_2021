@@ -12,7 +12,8 @@ namespace M3D_ISICG
 		{
 			LAB_WORK_1 = 1,
 			LAB_WORK_2 = 2,
-			LAB_WORK_3 = 3
+			LAB_WORK_3 = 3,
+			LAB_WORK_4 = 4
 		};
 
 	  public:
@@ -44,4 +45,4 @@ namespace M3D_ISICG
 	};
 } // namespace M3D_ISICG
 
-#endif // __CURRENT_LAB_WORK_MANAGER_HPP__
+#endif // __LAB_WORK_MANAGER_HPP__

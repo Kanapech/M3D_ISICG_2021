@@ -1,5 +1,7 @@
 #include "camera.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/string_cast.hpp"
+#include <iostream>
 
 namespace M3D_ISICG
 {
@@ -38,6 +40,18 @@ namespace M3D_ISICG
 		_updateVectors();
 	}
 
+	void Camera::print() const
+	{
+		std::cout << "======== Camera ========" << std::endl;
+		std::cout << "Position: " << glm::to_string( _position ) << std::endl;
+		std::cout << "View direction: " << glm::to_string( -_invDirection ) << std::endl;
+		std::cout << "Right: " << glm::to_string( _right ) << std::endl;
+		std::cout << "Up: " << glm::to_string( _up ) << std::endl;
+		std::cout << "Yaw: " << _yaw << std::endl;
+		std::cout << "Pitch: " << _pitch << std::endl;
+		std::cout << "========================" << std::endl;
+	}
+
 	void Camera::setPosition( const Vec3f & p_position )
 	{
 		_position = p_position;
@@ -46,7 +60,7 @@ namespace M3D_ISICG
 
 	void Camera::setLookAt( const Vec3f & p_lookAt )
 	{
-		_invDirection = Vec3f( p_lookAt.x, p_lookAt.y, -p_lookAt.z);
+		_invDirection = Vec3f( p_lookAt.x, p_lookAt.y, -p_lookAt.z );
 		_computeViewMatrix();
 	}
 
@@ -63,7 +77,7 @@ namespace M3D_ISICG
 
 	void Camera::_computeProjectionMatrix()
 	{
-		_projectionMatrix = glm::perspective( glm::radians(_fovy), _aspectRatio, _zNear, _zFar );
+		_projectionMatrix = glm::perspective( glm::radians( _fovy ), _aspectRatio, _zNear, _zFar );
 	}
 
 	void Camera::_updateVectors()
