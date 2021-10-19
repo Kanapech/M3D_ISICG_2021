@@ -25,9 +25,19 @@ namespace M3D_ISICG
 		// Clear the color buffer.
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		glBindVertexArray( _vao );
-		GLint _uAmbientLoc = GL_INVALID_INDEX;
-		_uAmbientLoc = glGetUniformLocation( p_glProgram, "uAmbient" );
-		glProgramUniform3fv( p_glProgram, _uAmbientLoc, 1, glm::value_ptr( _material._ambient) );
+
+		GLint _uAmbientLoc = glGetUniformLocation( p_glProgram, "uAmbient" );
+		glProgramUniform3fv( p_glProgram, _uAmbientLoc, 1, glm::value_ptr( _material._ambient ) );
+
+		GLint _uDiffuseLoc = glGetUniformLocation( p_glProgram, "uDiffuse" );
+		glProgramUniform3fv( p_glProgram, _uDiffuseLoc, 1, glm::value_ptr( _material._diffuse ) );
+
+		GLint _uSpecularLoc = glGetUniformLocation( p_glProgram, "uSpecular" );
+		glProgramUniform3fv( p_glProgram, _uSpecularLoc, 1, glm::value_ptr( _material._specular ) );
+		
+		GLint _uExpLoc = glGetUniformLocation( p_glProgram, "uExp" );
+		glProgramUniform1f( p_glProgram, _uExpLoc, _material._shininess );
+
 		glDrawElements( GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0 );
 		glBindVertexArray( 0 );
 	}
@@ -66,8 +76,11 @@ namespace M3D_ISICG
 		glVertexArrayAttribFormat( _vao, 3, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _tangent ) );
 		glVertexArrayAttribFormat( _vao, 4, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _bitangent ) );
 
-
 		glVertexArrayVertexBuffer( _vao, 0, _vbo, 0, sizeof(Vertex) );
+		glVertexArrayVertexBuffer( _vao, 1, _vbo, 0, sizeof( Vertex ) );
+		glVertexArrayVertexBuffer( _vao, 2, _vbo, 0, sizeof( Vertex ) );
+		glVertexArrayVertexBuffer( _vao, 3, _vbo, 0, sizeof( Vertex ) );
+		glVertexArrayVertexBuffer( _vao, 4, _vbo, 0, sizeof( Vertex ) );
 
 		glVertexArrayElementBuffer( _vao, _ebo );
 

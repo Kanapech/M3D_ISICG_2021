@@ -7,12 +7,15 @@ layout( location = 3 ) in vec3 aVertexTangent;
 layout( location = 4 ) in vec3 aVertexBitagent;
 
 uniform mat4 uMVPMatrix; // Projection * View * Model
-uniform vec3 uAmbient;
+uniform mat4 uNormalMatrix;
+uniform mat4 uMVMatrix;
 
-out vec4 fragColor;
+out vec3 normal;
+out vec3 fragPos;
 
 void main()
 {
 	gl_Position = uMVPMatrix * vec4( aVertexPosition, 1.f );
-	fragColor = vec4(uAmbient, 1.f);
+	normal = normalize( mat3(uNormalMatrix) * aVertexNormal );
+	fragPos = vec3( uMVMatrix * vec4(aVertexPosition, 1.f));
 }

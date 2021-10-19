@@ -24,6 +24,8 @@ namespace M3D_ISICG
 		glEnable( GL_DEPTH_TEST );
 
 		_bunny.load( "bunny", "src/lab_works/lab_work_4/bunny/bunny.obj" );
+		//_bunny.load( "conference", "src/lab_works/lab_work_4/conference/conference.obj" );
+		//_bunny._transformation = glm::scale( _bunny._transformation, glm::vec3( 0.003 ) );
 
 		if ( !_initProgram() )
 			return false;
@@ -42,8 +44,14 @@ namespace M3D_ISICG
 	{
 		// Clear the color buffer.
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-		Mat4f MVPMatrix = _camera.getProjectionMatrix() * _camera.getViewMatrix() * MAT4F_ID;
+		Mat4f MVPMatrix = _camera.getProjectionMatrix() * _camera.getViewMatrix() * _bunny._transformation;
 		glProgramUniformMatrix4fv( _program, _uMVPMatrixLoc, 1, GL_FALSE, glm::value_ptr( MVPMatrix ) );
+
+		Mat4f MVMatrix = _camera.getViewMatrix() * _bunny._transformation;
+		glProgramUniformMatrix4fv( _program, _uMVMatrixLoc, 1, GL_FALSE, glm::value_ptr( MVMatrix ) );
+
+		Mat4f normalMatrix = glm::transpose( glm::inverse( _camera.getViewMatrix() * _bunny._transformation ) );
+		glProgramUniformMatrix4fv( _program, _uNormalMatrixLoc, 1, GL_FALSE, glm::value_ptr( normalMatrix ) );
 		_bunny.render(_program);
 
 	}
@@ -194,6 +202,9 @@ namespace M3D_ISICG
 		// Get uniform locations.
 		// ====================================================================
 		_uMVPMatrixLoc		  = glGetUniformLocation( _program, "uMVPMatrix" );
+		_uMVMatrixLoc	  = glGetUniformLocation( _program, "uMVMatrix" );
+		_uNormalMatrixLoc = glGetUniformLocation( _program, "uNormalMatrix" );
+
 		// ====================================================================
 
 		return true;
