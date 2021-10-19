@@ -39,6 +39,7 @@ namespace M3D_ISICG
 		// ================ GL data.
 		GLuint _program				  = GL_INVALID_INDEX;
 		GLint  _uMVPMatrixLoc		  = GL_INVALID_INDEX;
+		GLint  _uAmbientLoc			  = GL_INVALID_INDEX;
 		// ================
 
 		// ================ Settings.
