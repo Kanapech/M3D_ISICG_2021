@@ -23,7 +23,7 @@ namespace M3D_ISICG
 	{
 		glEnable( GL_DEPTH_TEST );
 		// Clear the color buffer.
-		//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		// glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		glBindVertexArray( _vao );
 
 		GLint _uAmbientLoc = glGetUniformLocation( p_glProgram, "uAmbient" );
@@ -34,7 +34,7 @@ namespace M3D_ISICG
 
 		GLint _uSpecularLoc = glGetUniformLocation( p_glProgram, "uSpecular" );
 		glProgramUniform3fv( p_glProgram, _uSpecularLoc, 1, glm::value_ptr( _material._specular ) );
-		
+
 		GLint _uExpLoc = glGetUniformLocation( p_glProgram, "uExp" );
 		glProgramUniform1f( p_glProgram, _uExpLoc, _material._shininess );
 
@@ -55,10 +55,9 @@ namespace M3D_ISICG
 	}
 
 	void TriangleMesh::_setupGL()
-	{	
+	{		
 		glCreateBuffers( 1, &_vbo );
-		glNamedBufferData(
-			_vbo, _vertices.size() * sizeof( Vertex ), _vertices.data(), GL_STATIC_DRAW );
+		glNamedBufferData( _vbo, _vertices.size() * sizeof( Vertex ), _vertices.data(), GL_STATIC_DRAW );
 
 		glCreateBuffers( 1, &_ebo );
 		glNamedBufferData( _ebo, _indices.size() * sizeof( unsigned int ), _indices.data(), GL_STATIC_DRAW );
@@ -70,19 +69,18 @@ namespace M3D_ISICG
 		glEnableVertexArrayAttrib( _vao, 3 );
 		glEnableVertexArrayAttrib( _vao, 4 );
 
-		glVertexArrayAttribFormat( _vao, 0, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _position) );
+		glVertexArrayAttribFormat( _vao, 0, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _position ) );
 		glVertexArrayAttribFormat( _vao, 1, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _normal ) );
 		glVertexArrayAttribFormat( _vao, 2, 2, GL_FLOAT, GL_FALSE, offsetof( Vertex, _texCoords ) );
 		glVertexArrayAttribFormat( _vao, 3, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _tangent ) );
 		glVertexArrayAttribFormat( _vao, 4, 3, GL_FLOAT, GL_FALSE, offsetof( Vertex, _bitangent ) );
 
-		glVertexArrayVertexBuffer( _vao, 0, _vbo, 0, sizeof(Vertex) );
+		glVertexArrayVertexBuffer( _vao, 0, _vbo, 0, sizeof( Vertex ) );
 		glVertexArrayVertexBuffer( _vao, 1, _vbo, 0, sizeof( Vertex ) );
 		glVertexArrayVertexBuffer( _vao, 2, _vbo, 0, sizeof( Vertex ) );
 		glVertexArrayVertexBuffer( _vao, 3, _vbo, 0, sizeof( Vertex ) );
 		glVertexArrayVertexBuffer( _vao, 4, _vbo, 0, sizeof( Vertex ) );
 
 		glVertexArrayElementBuffer( _vao, _ebo );
-
 	}
 } // namespace M3D_ISICG

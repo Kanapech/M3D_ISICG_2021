@@ -7,6 +7,13 @@
 
 namespace M3D_ISICG
 {
+// General settings.
+#ifdef _DEBUG
+	const bool VERBOSE = true;
+#else
+	const bool VERBOSE = false;
+#endif
+
 	// Open GL constants.
 	const int  OPENGL_VERSION_MAJOR = 4;
 	const int  OPENGL_VERSION_MINOR = 5;

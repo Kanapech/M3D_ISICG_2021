@@ -41,6 +41,15 @@
     <Filter Include="Source Files\lab_works\lab_work_3\shaders">
       <UniqueIdentifier>{35e6dbd5-3a1e-4545-a224-b62ee2cf61c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\lab_works\common\models">
+      <UniqueIdentifier>{a5f1663a-e12d-4ced-ae8c-acf1c3c94079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_4">
+      <UniqueIdentifier>{a1b68507-69cd-4e3a-9725-578389f7c2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_4\shaders">
+      <UniqueIdentifier>{8c6c5402-7cc7-41a0-ae4e-9e7e7781d88f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp">
@@ -85,13 +94,19 @@
     <ClCompile Include="src\lab_works\lab_work_2\lab_work_2.cpp">
       <Filter>Source Files\lab_works\lab_work_2</Filter>
     </ClCompile>
-    <ClCompile Include="src\lab_works\lab_work_4\lab_work_4.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\lab_works\common\models\triangle_mesh_model.cpp">
+      <Filter>Source Files\lab_works\common\models</Filter>
     </ClCompile>
     <ClCompile Include="src\lab_works\common\models\triangle_mesh.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\lab_works\common\models</Filter>
     </ClCompile>
-    <ClCompile Include="src\lab_works\common\models\triangle_mesh_model.cpp">
+    <ClCompile Include="src\lab_works\lab_work_4\lab_work_4.cpp">
+      <Filter>Source Files\lab_works\lab_work_4</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\image.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\lab_work_5\lab_work_5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,10 +162,25 @@
     <ClInclude Include="src\lab_works\lab_work_3\lab_work_3.hpp">
       <Filter>Source Files\lab_works\lab_work_3</Filter>
     </ClInclude>
-    <ClInclude Include="src\lab_works\lab_work_4\lab_work_4.hpp" />
-    <ClInclude Include="src\lab_works\common\models\base_model.hpp" />
-    <ClInclude Include="src\lab_works\common\models\triangle_mesh.hpp" />
-    <ClInclude Include="src\lab_works\common\models\triangle_mesh_model.hpp" />
+    <ClInclude Include="src\lab_works\common\models\base_model.hpp">
+      <Filter>Source Files\lab_works\common\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\common\models\triangle_mesh.hpp">
+      <Filter>Source Files\lab_works\common\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\common\models\triangle_mesh_model.hpp">
+      <Filter>Source Files\lab_works\common\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\lab_work_4\lab_work_4.hpp">
+      <Filter>Source Files\lab_works\lab_work_4</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\image.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\file_path.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\lab_work_5\lab_work_5.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\lab_works\lab_work_1\shaders\lw1.frag">
@@ -171,7 +201,13 @@
     <None Include="src\lab_works\lab_work_3\shaders\triangle.frag">
       <Filter>Source Files\lab_works\lab_work_3\shaders</Filter>
     </None>
-    <None Include="src\lab_works\lab_work_4\shaders\mesh.frag" />
-    <None Include="src\lab_works\lab_work_4\shaders\mesh.vert" />
+    <None Include="src\lab_works\lab_work_4\shaders\mesh.vert">
+      <Filter>Source Files\lab_works\lab_work_4\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_4\shaders\mesh.frag">
+      <Filter>Source Files\lab_works\lab_work_4\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_5\shaders\mesh_texture.frag" />
+    <None Include="src\lab_works\lab_work_5\shaders\mesh_texture.vert" />
   </ItemGroup>
 </Project>

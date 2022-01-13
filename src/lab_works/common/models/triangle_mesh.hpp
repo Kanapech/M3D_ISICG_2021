@@ -17,19 +17,29 @@ namespace M3D_ISICG
 		Vec3f _bitangent;
 	};
 
+	struct Texture
+	{
+		unsigned int _id;
+		std::string	 _type;
+		std::string	 _path;
+	};
+
 	struct Material
 	{
 		Vec3f _ambient	 = VEC3F_ZERO;
 		Vec3f _diffuse	 = VEC3F_ZERO;
 		Vec3f _specular	 = VEC3F_ZERO;
 		float _shininess = 0.f;
-	};
 
-	struct Texture
-	{
-		unsigned int _id;
-		std::string	 _type;
-		std::string	 _path;
+		bool _hasAmbientMap	  = false;
+		bool _hasDiffuseMap	  = false;
+		bool _hasSpecularMap  = false;
+		bool _hasShininessMap = false;
+
+		Texture _ambientMap;
+		Texture _diffuseMap;
+		Texture _specularMap;
+		Texture _shininessMap;
 	};
 
 	class TriangleMesh
