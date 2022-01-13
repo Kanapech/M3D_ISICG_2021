@@ -23,7 +23,7 @@ namespace M3D_ISICG
 	{
 		glEnable( GL_DEPTH_TEST );
 		// Clear the color buffer.
-		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		glBindVertexArray( _vao );
 
 		GLint _uAmbientLoc = glGetUniformLocation( p_glProgram, "uAmbient" );
