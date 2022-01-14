@@ -30,20 +30,20 @@ void main()
 	
 	vec3 normalM = normal;
 
-	vec3 diffuse = uDiffuse;
+	vec4 diffuse = vec4(uDiffuse, 1.f);
 	vec3 ambient = uAmbient;
 	vec3 specular = uSpecular;
 	float shininess = uShininess;
 	vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
 
-	if( uHasNormalMap ){
+	/*if( uHasNormalMap ){
 		normalM = texture( uNormalMap, texCoords ).xyz ;
 		normalM = normalize( normalM * 2.0 - 1.0 );
 
 		lightDir = normalize( tangentLightPos - tangentFragPos );
-	}
+	}*/
 	if( uHasDiffuseMap ){
-		diffuse = texture(uDiffuseMap, texCoords).xyz;
+		diffuse = texture(uDiffuseMap, texCoords);
 	}
 	if( uHasAmbientMap ){
 		ambient = texture(uAmbiantMap, texCoords).xyz;
@@ -56,14 +56,14 @@ void main()
 	}
 
 	
-	vec3 diff = diffuse * max( dot( normalM, lightDir), 0.f );
+	vec3 diff = diffuse.xyz * max( dot( normalM, lightDir), 0.f );
 
 	// la lumière est au même endroit que la caméra donc on normalize la valeur doublée
 	vec3 spec = specular * pow( max( dot( normalM, normalize( lightDir + lightDir ) ), 0.f ), shininess );
 
-	vec3 res = spec + diff + ambient;
+	vec3 res = spec + diff.xyz + ambient;
 
-	fragColor = vec4( res, 1.f );
+	fragColor = vec4( res, diffuse.w );
 
 	
 

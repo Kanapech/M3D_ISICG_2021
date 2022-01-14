@@ -22,6 +22,8 @@ namespace M3D_ISICG
 	void TriangleMesh::render( const GLuint p_glProgram ) const
 	{
 		glEnable( GL_DEPTH_TEST );
+		glEnable( GL_BLEND );
+		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 		// Clear the color buffer.
 		// glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		glBindVertexArray( _vao );

@@ -307,7 +307,7 @@ namespace M3D_ISICG
 			}
 
 			// Define Mipmap levels
-			float mipmapLevels = 1 + glm::floor( log2( glm::max( image._width, image._height ) ) );
+			int mipmapLevels = 1 + glm::floor( log2( glm::max( image._width, image._height ) ) );
 
 			// Setup the texture format.
 			glTextureStorage2D( texture._id, mipmapLevels, internalFormat, image._width, image._height );

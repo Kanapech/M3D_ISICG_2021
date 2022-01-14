@@ -26,7 +26,7 @@ namespace M3D_ISICG
 		//_bunny.load( "bunny", "src/lab_works/lab_work_5/bunny_2/bunny_2.obj" );
 		_bunny.load( "sponza", "src/lab_works/lab_work_5/sponza/sponza.obj" );
 		//_bunny.load( "conference", "src/lab_works/lab_work_4/conference/conference.obj" );
-		//_bunny._transformation = glm::scale( _bunny._transformation, glm::vec3( 0.003 ) );
+		_bunny._transformation = glm::scale( _bunny._transformation, glm::vec3( 0.003 ) );
 
 		if ( !_initProgram() )
 			return false;
