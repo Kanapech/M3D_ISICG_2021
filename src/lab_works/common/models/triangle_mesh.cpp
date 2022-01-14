@@ -84,6 +84,7 @@ namespace M3D_ISICG
 		glDeleteTextures( 1, &_material._diffuseMap._id );
 		glDeleteTextures( 1, &_material._ambientMap._id );
 		glDeleteTextures( 1, &_material._specularMap._id );
+		glDeleteTextures( 1, &_material._normalMap._id );
 		glDeleteTextures( 1, &_material._shininessMap._id );
 	}
 
