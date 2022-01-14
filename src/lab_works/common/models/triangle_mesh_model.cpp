@@ -289,16 +289,21 @@ namespace M3D_ISICG
 				internalFormat = GL_RGBA32F;
 			}
 
+			// Define Mipmap levels
+			float mipmapLevels = 1 + glm::floor( log2( glm::max( image._width, image._height ) ) );
+
 			// Setup the texture format.
-			glTextureStorage2D( texture._id, 1, internalFormat, image._width, image._height );
+			glTextureStorage2D( texture._id, mipmapLevels, internalFormat, image._width, image._height );
 			glTextureParameteri( texture._id, GL_TEXTURE_WRAP_S, GL_REPEAT );
 			glTextureParameteri( texture._id, GL_TEXTURE_WRAP_T, GL_REPEAT );
-			glTextureParameteri( texture._id, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-			glTextureParameteri( texture._id, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+			glTextureParameteri( texture._id, GL_LINEAR_MIPMAP_LINEAR, GL_NEAREST );
+			glTextureParameteri( texture._id, GL_LINEAR, GL_NEAREST );
 
 			// Fill the texture.
 			glTextureSubImage2D(
 				texture._id, 0, 0, 0, image._width, image._height, format, GL_UNSIGNED_BYTE, image._pixels );
+
+			glGenerateTextureMipmap( texture._id );
 		}
 
 		// Save loaded texture.
