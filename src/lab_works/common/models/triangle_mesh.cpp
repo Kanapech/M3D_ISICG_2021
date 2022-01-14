@@ -40,10 +40,27 @@ namespace M3D_ISICG
 
 		GLint _uHasDiffuseMapLoc = glGetUniformLocation( p_glProgram, "uHasDiffuseMap" );
 		glProgramUniform1i( p_glProgram, _uHasDiffuseMapLoc, _material._hasDiffuseMap );
+
+		GLint _uHasAmbientMapLoc = glGetUniformLocation( p_glProgram, "uHasAmbientMap" );
+		glProgramUniform1i( p_glProgram, _uHasAmbientMapLoc, _material._hasAmbientMap );
+
+		GLint _uHasSpecularMapLoc = glGetUniformLocation( p_glProgram, "uHasSpecularMap" );
+		glProgramUniform1i( p_glProgram, _uHasSpecularMapLoc, _material._hasSpecularMap );
+
+		GLint _uHasShininessMapLoc = glGetUniformLocation( p_glProgram, "uHasShininessMap" );
+		glProgramUniform1i( p_glProgram, _uHasShininessMapLoc, _material._hasShininessMap );
+
+
 		glBindTextureUnit( 1, _material._diffuseMap._id );
+		glBindTextureUnit( 2, _material._ambientMap._id );
+		glBindTextureUnit( 3, _material._specularMap._id );
+		glBindTextureUnit( 4, _material._shininessMap._id );
 		glDrawElements( GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0 );
 		glBindVertexArray( 0 );
 		glBindTextureUnit( 1, 0 );
+		glBindTextureUnit( 2, 0 );
+		glBindTextureUnit( 3, 0 );
+		glBindTextureUnit( 4, 0 );
 	}
 
 	void TriangleMesh::cleanGL()
@@ -56,6 +73,10 @@ namespace M3D_ISICG
 		glDeleteVertexArrays( 1, &_vao );
 		glDeleteBuffers( 1, &_vbo );
 		glDeleteBuffers( 1, &_ebo );
+		glDeleteTextures( 1, &_material._diffuseMap._id );
+		glDeleteTextures( 1, &_material._ambientMap._id );
+		glDeleteTextures( 1, &_material._specularMap._id );
+		glDeleteTextures( 1, &_material._shininessMap._id );
 	}
 
 	void TriangleMesh::_setupGL()

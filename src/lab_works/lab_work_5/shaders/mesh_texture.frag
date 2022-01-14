@@ -7,7 +7,14 @@ uniform vec3 uDiffuse;
 uniform vec3 uSpecular;
 uniform float uExp;
 uniform bool uHasDiffuseMap;
+uniform bool uHasAmbientMap;
+uniform bool uHasSpecularMap;
+uniform bool uHasShininessMap;
+
 layout( binding = 1 ) uniform sampler2D uDiffuseMap;
+layout( binding = 2 ) uniform sampler2D uAmbiantMap;
+layout( binding = 3 ) uniform sampler2D uSpecularMap;
+layout( binding = 4 ) uniform sampler2D uShininessMap;
 
 in vec3 normal;
 in vec3 fragPos;
@@ -16,8 +23,12 @@ in vec2 texCoords;
 void main()
 {
 	
-	if( uHasDiffuseMap ){
-		fragColor = texture(uDiffuseMap, texCoords);
+	if( uHasDiffuseMap || uHasAmbientMap || uHasSpecularMap || uHasShininessMap ){
+		vec4 diffuse = texture(uDiffuseMap, texCoords);
+		vec4 ambiant = texture(uAmbiantMap, texCoords);
+		vec3 specular = texture(uDiffuseMap, texCoords).xxx;
+		float shininess = texture(uDiffuseMap, texCoords).x;
+		fragColor = diffuse+ambiant;
 	}
 	else{
 		vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
