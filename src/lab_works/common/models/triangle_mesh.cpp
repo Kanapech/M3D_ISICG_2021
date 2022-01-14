@@ -35,8 +35,8 @@ namespace M3D_ISICG
 		GLint _uSpecularLoc = glGetUniformLocation( p_glProgram, "uSpecular" );
 		glProgramUniform3fv( p_glProgram, _uSpecularLoc, 1, glm::value_ptr( _material._specular ) );
 
-		GLint _uExpLoc = glGetUniformLocation( p_glProgram, "uExp" );
-		glProgramUniform1f( p_glProgram, _uExpLoc, _material._shininess );
+		GLint _uShininessLoc = glGetUniformLocation( p_glProgram, "uShininess" );
+		glProgramUniform1f( p_glProgram, _uShininessLoc, _material._shininess );
 
 		GLint _uHasDiffuseMapLoc = glGetUniformLocation( p_glProgram, "uHasDiffuseMap" );
 		glProgramUniform1i( p_glProgram, _uHasDiffuseMapLoc, _material._hasDiffuseMap );
