@@ -23,12 +23,21 @@ in vec2 texCoords;
 void main()
 {
 	
-	if( uHasDiffuseMap || uHasAmbientMap || uHasSpecularMap || uHasShininessMap ){
+	if( uHasDiffuseMap == true ){
 		vec4 diffuse = texture(uDiffuseMap, texCoords);
+		fragColor = diffuse;
+	}
+	else if( uHasAmbientMap == true ){
 		vec4 ambiant = texture(uAmbiantMap, texCoords);
-		vec3 specular = texture(uDiffuseMap, texCoords).xxx;
-		float shininess = texture(uDiffuseMap, texCoords).x;
-		fragColor = diffuse+ambiant;
+		fragColor = ambiant;
+	}
+	else if( uHasSpecularMap == true ){
+		vec3 specular = texture(uSpecularMap, texCoords).xxx;
+		fragColor = vec4( specular, 1.f );
+	}
+	else if( uHasShininessMap == true ){
+		float shininess = texture(uShininessMap, texCoords).x;
+		fragColor = vec4( shininess );
 	}
 	else{
 		vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
