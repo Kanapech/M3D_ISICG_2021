@@ -41,6 +41,7 @@ namespace M3D_ISICG
 		GLint  _uMVPMatrixLoc		  = GL_INVALID_INDEX;
 		GLint  _uNormalMatrixLoc		= GL_INVALID_INDEX;
 		GLint  _uMVMatrixLoc	  = GL_INVALID_INDEX;
+		GLint  _uModelMatrixLoc			= GL_INVALID_INDEX;
 		// ================
 
 		// ================ Settings.

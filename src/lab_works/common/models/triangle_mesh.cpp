@@ -35,6 +35,9 @@ namespace M3D_ISICG
 		GLint _uSpecularLoc = glGetUniformLocation( p_glProgram, "uSpecular" );
 		glProgramUniform3fv( p_glProgram, _uSpecularLoc, 1, glm::value_ptr( _material._specular ) );
 
+		GLint _uNormalLoc = glGetUniformLocation( p_glProgram, "uNormal" );
+		glProgramUniform3fv( p_glProgram, _uNormalLoc, 1, glm::value_ptr( _material._normal ) );
+
 		GLint _uShininessLoc = glGetUniformLocation( p_glProgram, "uShininess" );
 		glProgramUniform1f( p_glProgram, _uShininessLoc, _material._shininess );
 
@@ -47,6 +50,9 @@ namespace M3D_ISICG
 		GLint _uHasSpecularMapLoc = glGetUniformLocation( p_glProgram, "uHasSpecularMap" );
 		glProgramUniform1i( p_glProgram, _uHasSpecularMapLoc, _material._hasSpecularMap );
 
+		GLint _uHasNormalMapLoc = glGetUniformLocation( p_glProgram, "uHasNormalMap" );
+		glProgramUniform1i( p_glProgram, _uHasNormalMapLoc, _material._hasNormalMap );
+
 		GLint _uHasShininessMapLoc = glGetUniformLocation( p_glProgram, "uHasShininessMap" );
 		glProgramUniform1i( p_glProgram, _uHasShininessMapLoc, _material._hasShininessMap );
 
@@ -55,12 +61,14 @@ namespace M3D_ISICG
 		glBindTextureUnit( 2, _material._ambientMap._id );
 		glBindTextureUnit( 3, _material._specularMap._id );
 		glBindTextureUnit( 4, _material._shininessMap._id );
+		glBindTextureUnit( 5, _material._normalMap._id );
 		glDrawElements( GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0 );
 		glBindVertexArray( 0 );
 		glBindTextureUnit( 1, 0 );
 		glBindTextureUnit( 2, 0 );
 		glBindTextureUnit( 3, 0 );
 		glBindTextureUnit( 4, 0 );
+		glBindTextureUnit( 5, 0 );
 	}
 
 	void TriangleMesh::cleanGL()

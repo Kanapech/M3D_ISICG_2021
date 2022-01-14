@@ -218,6 +218,23 @@ namespace M3D_ISICG
 
 		// =====================================================
 
+		// ===================================================== NORMAL
+		if ( p_mtl->GetTextureCount( aiTextureType_NORMALS ) > 0 ) // Texture ?
+		{
+			p_mtl->GetTexture( aiTextureType_NORMALS, 0, &texturePath );
+			texture = _loadTexture( texturePath, "normal" );
+			if ( texture._id != GL_INVALID_INDEX )
+			{
+				material._normalMap	 = texture;
+				material._hasNormalMap = true;
+			}
+		}
+		else if ( p_mtl->Get( AI_MATKEY_COLOR_SPECULAR, color ) == AI_SUCCESS ) // else Material ?
+		{
+			material._normal = Vec3f( color.r, color.g, color.b );
+		}
+		// =====================================================
+
 		return material;
 	}
 

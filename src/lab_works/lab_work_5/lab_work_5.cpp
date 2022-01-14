@@ -51,6 +51,9 @@ namespace M3D_ISICG
 		Mat4f MVMatrix = _camera.getViewMatrix() * _bunny._transformation;
 		glProgramUniformMatrix4fv( _program, _uMVMatrixLoc, 1, GL_FALSE, glm::value_ptr( MVMatrix ) );
 
+		Mat4f modelMatrix =_bunny._transformation;
+		glProgramUniformMatrix4fv( _program, _uModelMatrixLoc, 1, GL_FALSE, glm::value_ptr( modelMatrix ) );
+
 		Mat4f normalMatrix = glm::transpose( glm::inverse( _camera.getViewMatrix() * _bunny._transformation ) );
 		glProgramUniformMatrix4fv( _program, _uNormalMatrixLoc, 1, GL_FALSE, glm::value_ptr( normalMatrix ) );
 		_bunny.render(_program);
@@ -204,6 +207,7 @@ namespace M3D_ISICG
 		// ====================================================================
 		_uMVPMatrixLoc		  = glGetUniformLocation( _program, "uMVPMatrix" );
 		_uMVMatrixLoc	  = glGetUniformLocation( _program, "uMVMatrix" );
+		_uModelMatrixLoc		  = glGetUniformLocation( _program, "uModelMatrix" );
 		_uNormalMatrixLoc = glGetUniformLocation( _program, "uNormalMatrix" );
 
 		// ====================================================================
