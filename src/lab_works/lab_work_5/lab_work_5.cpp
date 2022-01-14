@@ -213,6 +213,6 @@ namespace M3D_ISICG
 	void LabWork5::_initCamera()
 	{
 		_camera.setScreenSize( _windowWidth, _windowHeight );
-		_camera.setPosition( Vec3f( 0.f, 0.f, 3.f ) );
+		_camera.setPosition( Vec3f( 0.f, 0.f, 0.2f ) );
 	}
 } // namespace M3D_ISICG

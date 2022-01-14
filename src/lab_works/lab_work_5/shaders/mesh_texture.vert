@@ -12,10 +12,12 @@ uniform mat4 uMVMatrix;
 
 out vec3 normal;
 out vec3 fragPos;
+out vec2 texCoords;
 
 void main()
 {
 	gl_Position = uMVPMatrix * vec4( aVertexPosition, 1.f );
 	normal = normalize( mat3(uNormalMatrix) * aVertexNormal );
 	fragPos = vec3( uMVMatrix * vec4(aVertexPosition, 1.f));
+	texCoords = aVertexTexCoords;
 }

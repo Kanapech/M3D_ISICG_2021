@@ -6,20 +6,31 @@ uniform vec3 uAmbient;
 uniform vec3 uDiffuse;
 uniform vec3 uSpecular;
 uniform float uExp;
+uniform bool uHasDiffuseMap;
+layout( binding = 1 ) uniform sampler2D uDiffuseMap;
 
 in vec3 normal;
 in vec3 fragPos;
+in vec2 texCoords;
 
 void main()
 {
+	
+	if( uHasDiffuseMap ){
+		fragColor = texture(uDiffuseMap, texCoords);
+	}
+	else{
+		vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
+		vec3 diff = uDiffuse * max( dot( normal, lightDir), 0.f );
 
-	vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
-	vec3 diff = uDiffuse * max( dot( normal, lightDir), 0.f );
+		// la lumière est au même endroit que la caméra donc on normalize la valeur doublée
+		vec3 spec = uSpecular * pow( max( dot( normal, normalize( lightDir + lightDir ) ), 0.f ), uExp );
 
-	// la lumière est au même endroit que la caméra donc on normalize la valeur doublée
-	vec3 spec = uSpecular * pow( max( dot( normal, normalize( lightDir + lightDir ) ), 0.f ), uExp );
+		vec3 res = spec + diff + uAmbient;
 
-	vec3 res = spec + diff + uAmbient;
+		fragColor = vec4( res, 1.f );
+	}
+	
 
-	fragColor = vec4( res, 1.f );
+	
 }

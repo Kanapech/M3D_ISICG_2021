@@ -38,8 +38,12 @@ namespace M3D_ISICG
 		GLint _uExpLoc = glGetUniformLocation( p_glProgram, "uExp" );
 		glProgramUniform1f( p_glProgram, _uExpLoc, _material._shininess );
 
+		GLint _uHasDiffuseMapLoc = glGetUniformLocation( p_glProgram, "uHasDiffuseMap" );
+		glProgramUniform1i( p_glProgram, _uHasDiffuseMapLoc, _material._hasDiffuseMap );
+		glBindTextureUnit( 1, _material._diffuseMap._id );
 		glDrawElements( GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0 );
 		glBindVertexArray( 0 );
+		glBindTextureUnit( 1, 0 );
 	}
 
 	void TriangleMesh::cleanGL()

@@ -12,7 +12,6 @@ in vec3 fragPos;
 
 void main()
 {
-
 	vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
 	vec3 diff = uDiffuse * max( dot( normal, lightDir), 0.f );
 
