@@ -36,14 +36,16 @@ void main()
 	float shininess = uShininess;
 	vec3 lightDir = normalize( vec3( 0.f ) - fragPos );
 
-	/*if( uHasNormalMap ){
+	if( uHasNormalMap ){
 		normalM = texture( uNormalMap, texCoords ).xyz ;
 		normalM = normalize( normalM * 2.0 - 1.0 );
 
 		lightDir = normalize( tangentLightPos - tangentFragPos );
-	}*/
+	}
 	if( uHasDiffuseMap ){
 		diffuse = texture(uDiffuseMap, texCoords);
+		if(diffuse.w < 0.5)
+			discard;
 	}
 	if( uHasAmbientMap ){
 		ambient = texture(uAmbiantMap, texCoords).xyz;

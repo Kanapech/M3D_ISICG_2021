@@ -1,0 +1,85 @@
+# exported by https://3dviewer.net
+newmtl Doors_TVStand_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Doors_TVStand_MAT_AlbedoTransparency.png
+newmtl Lights_towel_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Lights_towel_MAT_AlbedoTransparency.png
+newmtl Rug_Curtains_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Rug_Curtains_MAT_AlbedoTransparency.png
+newmtl Bathroom_Oven_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Bathroom_Oven_MAT_AlbedoTransparency.png
+newmtl Plastic_Steel_Handle_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd PlasticSteelHandle_AlbedoTransparency.png
+newmtl Fireplace_KitchenBench_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Fireplace_KitchenBench_AlbedoTransparency.png
+newmtl BuildingA_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd BuildingA_MAT_AlbedoTransparency.png
+newmtl BuildingB_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd BuildingB_MAT_AlbedoTransparency.png
+newmtl BedroomFurniture_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd BedroomFurniture_AlbedoTransparency.png
+newmtl Bed_Sink_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Bed_Sink_MAT_AlbedoTransparency.png
+newmtl TV_Lamp_Table_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd TV_Lamp_Table_AlbedoTransparency.png
+newmtl Chairs_MAT
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0 0 0
+Ns 0
+map_Kd Chairs_AlbedoTransparency.png
