@@ -43,6 +43,7 @@ namespace M3D_ISICG
 		Texture _specularMap;
 		Texture _normalMap;
 		Texture _shininessMap;
+		Texture _lightMap;
 	};
 
 	class TriangleMesh

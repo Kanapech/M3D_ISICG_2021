@@ -18,6 +18,8 @@ layout( binding = 3 ) uniform sampler2D uSpecularMap;
 layout( binding = 4 ) uniform sampler2D uShininessMap;
 layout( binding = 5 ) uniform sampler2D uNormalMap;
 
+layout ( binding = 6 ) uniform sampler2D uLightMap;
+
 in vec3 normal;
 in vec3 fragPos;
 in vec2 texCoords;
@@ -64,6 +66,8 @@ void main()
 	vec3 spec = specular * pow( max( dot( normalM, normalize( lightDir + lightDir ) ), 0.f ), shininess );
 
 	vec3 res = spec + diff.xyz + ambient;
+
+	vec4 lightMapColor = texture(uLightMap, texCoords); //Non fonctionnel
 
 	fragColor = vec4( res, diffuse.w );
 

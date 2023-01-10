@@ -235,6 +235,10 @@ namespace M3D_ISICG
 		}
 		// =====================================================
 
+		aiString lightMapPath("lightMap.png" );
+		texture				  = _loadTexture( lightMapPath, "light" );
+		material._lightMap	   = texture;
+
 		return material;
 	}
 

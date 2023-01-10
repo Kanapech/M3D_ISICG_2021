@@ -3,6 +3,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
+#include "utils/image.hpp"
 #include <iostream>
 
 namespace M3D_ISICG
@@ -64,6 +65,8 @@ namespace M3D_ISICG
 		glBindTextureUnit( 3, _material._specularMap._id );
 		glBindTextureUnit( 4, _material._shininessMap._id );
 		glBindTextureUnit( 5, _material._normalMap._id );
+
+		glBindTextureUnit( 6, _material._lightMap._id );
 		glDrawElements( GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0 );
 		glBindVertexArray( 0 );
 		glBindTextureUnit( 1, 0 );
@@ -71,6 +74,7 @@ namespace M3D_ISICG
 		glBindTextureUnit( 3, 0 );
 		glBindTextureUnit( 4, 0 );
 		glBindTextureUnit( 5, 0 );
+		glBindTextureUnit( 6, 0 );
 	}
 
 	void TriangleMesh::cleanGL()
